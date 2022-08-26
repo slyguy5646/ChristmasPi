@@ -1,0 +1,19 @@
+.hello {
+    text-align: center;
+    color:black;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.buttons input {
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    padding: 0%;
+}
+
+.offbtn {
+    background-color: red;
+}
