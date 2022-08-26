@@ -1,2 +1,2 @@
 # christmaslightcontrol
-Control neopixel christmas lights connected to a raspberry pi through a webserver running on the Pi!.
+Control WS2811 neopixel christmas lights connected to a raspberry pi through a Flask webserver running on the Pi!.
