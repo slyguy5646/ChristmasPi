@@ -4,20 +4,29 @@ import neopixel
 #initializes strip on GPIO 18 with 50 LEDs on that strip
 pixels = neopixel.NeoPixel(board.D18, 50)
 
-#function to turn the first LED on the strip solid green
+#COLOR DEFENITIONS GRB
+off = (0, 0, 0)
+blue = (0, 0, 255)
+green = (255, 0, 0)
+red = (0, 255, 0)
+
+effectColor = off
+
+#function to turn all leds off except the first which will glow green
 def ledOn():
-    pixels[0] = (255, 0, 0)
-    return 'light is on!'
+    pixels.fill((off))
+    pixels[0] = (green)
 
 #function to turn all LEDs solid green
-def fullGreen():
-    pixels.fill((255, 0, 0))
+def fullOn():
+    pixels.fill((green))
 
 
 #function to turn all LEDs off
 def ledOff():
-    pixels.fill((0, 0, 0))
+    pixels.fill((off))
     return 'light is off!'
+
 
 
 
