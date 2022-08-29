@@ -13,13 +13,13 @@ red = (0, 255, 0)
 effectColor = off
 
 #function to turn all leds off except the first which will glow green
-def ledOn():
+def ledOn(colorValue):
     pixels.fill((off))
-    pixels[0] = (green)
+    pixels[0] = (colorValue)
 
 #function to turn all LEDs solid green
-def fullOn():
-    pixels.fill((green))
+def fullOn(colorValue):
+    pixels.fill((colorValue))
 
 
 #function to turn all LEDs off
