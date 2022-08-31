@@ -32,13 +32,23 @@ def index():
         #checks if ledOff button was pressed
         elif request.form.get('ledOff') == 'OFF':            
                 ledOff()
+                pixels.show()
+                setStatus('OFF')
+        elif request.form.get('apply') == 'APPLY':
+   #             if bool(effectColor) == False:
+   #                 return '/colorerror'
+                pixels.show()
+                setStatus('ON')
+                #showMe()
 
     elif request.method == 'GET':
         return render_template('index.html')
     
-    return render_template('index.html', variable = effectColorString)
+    return render_template('index.html', colorString = effectColorString[0], effectString = currentEffectString[0], statusString = status[0])
 
-
+@app.route('/colorerror')
+def colorError():
+    return render_template('colorerror.html')
 
 
 if __name__ == '__main__':
