@@ -1,3 +1,4 @@
+from tkinter import Variable
 from flask import Flask, render_template, request
 import re
 import board
@@ -13,22 +14,30 @@ app = Flask(__name__)
 #function to get the button input
 def index():
     if request.method == 'POST':
+        #check if red color button was pressed
         if request.form.get('Red') == 'red':
-            setRed()
+             setRed()
+        #check if green color button was pressed
         elif request.form.get('Green') == 'green':
             setGreen()
+        #check if blue color button was pressed
         elif request.form.get('Blue') == 'blue':
             setBlue()
+        #check if ledOn button was was pressed
         elif request.form.get('ledOn') == 'FirstON':
-            ledOn(effectColor[0])
+                ledOn(effectColor[0])
+        #checks if fullOn button was pressed
         elif request.form.get('fullOn') == 'FULLON':
-            fullOn(effectColor[0])
-        elif request.form.get('ledOff') == 'OFF':
-            ledOff()
+                fullOn(effectColor[0])
+        #checks if ledOff button was pressed
+        elif request.form.get('ledOff') == 'OFF':            
+                ledOff()
+
     elif request.method == 'GET':
         return render_template('index.html')
     
-    return render_template('index.html')
+    return render_template('index.html', variable = effectColorString)
+
 
 
 

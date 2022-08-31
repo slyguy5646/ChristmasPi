@@ -13,24 +13,33 @@ red = (0, 255, 0)
 
 #initialize effectColor list to hold last selected color
 effectColor = []
+effectColorString = []
+
+
 
 #set color to red
 def setRed():
     effectColor.clear()
     effectColor.append(red)
-    return effectColor
+    effectColorString.clear()
+    effectColorString.append('Red')
+    return effectColor, effectColorString
 
 #set color to green
 def setGreen():
     effectColor.clear()
     effectColor.append(green)
-    return effectColor
+    effectColorString.clear()
+    effectColorString.append('Green')
+    return effectColor, effectColorString
 
 #set color to blue
 def setBlue():
     effectColor.clear()
     effectColor.append(blue)
-    return effectColor
+    effectColorString.clear()
+    effectColorString.append('Blue')
+    return effectColor, effectColorString
 
 #function to turn all leds off except the first which will glow green
 def ledOn(colorvalue):
@@ -45,7 +54,10 @@ def fullOn(colorValue):
 #function to turn all LEDs off
 def ledOff():
     pixels.fill((off))
-    return 'light is off!'
+    effectColorString.clear()
+    effectColorString.append('Lights are currently off')
+    effectColor.clear()
+    return effectColor, effectColorString
 
 
 
