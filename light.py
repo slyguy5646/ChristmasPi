@@ -13,9 +13,9 @@ red = (0, 255, 0)
 
 #initialize lists to hold LED status data
 effectColor = [off]
-effectColorString = []
-currentEffectString = []
-status = []
+effectColorString = ['off']
+currentEffectString = ['off']
+status = ['off']
 
 def setStatus(statusArg):
     status.clear()
