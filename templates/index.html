@@ -5,21 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Light Control Server</title>
-    <link rel= "stylesheet" type= "text/css" href= "../static/index.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
 </head>
 <body>
-    <h1 class="hello">Pi Control Panel</h1>
-    <!--<p>The LEDs are currently: {{ varaible }}</p> -->
-    <div class="buttons">
-            <h1>Current color: {{ colorString }}</h1>
-            <h1>Current effect: {{ effectString }}</h1>
-            <h1>LED Status: {{ statusString }}</h1>
+    <div class="divparent">
+            <h1 class="title">Pi Control Panel</h1>
+            <h1 class="color">Current color: {{ colorString }}</h1>
+            <h1 class="effect">Current effect: {{ effectString }}</h1>
+            <h1 class="status">LED Status: {{ statusString }}</h1>
             <form method="post" action="/">
-                <input class="red"type="submit" value="red" name="Red">
+                <input class="red" type="submit" value="red" name="Red">
                 <input class="green" type="submit" value="green" name="Green">
                 <input class="blue" type="submit" value="blue" name="Blue">
-                <input class="firstgreenbtn" type="submit" value="FirstON" name="ledOn">
-                <input class="fullgreenbtn" type="submit" value="FULLON" name="fullOn">
+                <input class="ledon" type="submit" value="FirstON" name="ledOn">
+                <input class="fullon" type="submit" value="FULLON" name="fullOn">
                 <br>
                     <input class="offbtn" type="submit" value="OFF" name="ledOff">
                     <input class="applybtn" type="submit" value="APPLY" name="apply">
