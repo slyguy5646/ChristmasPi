@@ -1,6 +1,7 @@
 import board
 import neopixel
-
+import time
+import os
 
 #initializes strip on GPIO 18 with 50 LEDs on that strip
 pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
@@ -70,8 +71,8 @@ def ledOff():
     currentEffectString.append('Lights are off')
     return effectColor, effectColorString
 
-
-
-
-
-
+# def travelingPixel(colorvalue):
+#     currentEffectString.clear()
+#     currentEffectString.append('Pixel traveling...')
+#     for i in range(1, 50):
+#         pixels[i] = colorvalue
