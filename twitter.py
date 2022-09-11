@@ -18,36 +18,46 @@ def appendTweet(tweet):
 
 
 commands = ['@pi_lights']
+userId = []
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
       return print('Connected!')
    
    def on_tweet(self, tweet):
-      if '!color' in tweet.text.lower():
-         if '!red' in tweet.text.lower():
-            effectColor.clear()
-            effectColor.append(red)
-            print(effectColor[0])
-         elif '!green' in tweet.text.lower():
-            effectColor.clear()
-            effectColor.append(green)
-            print(effectColor[0])
-         elif '!blue' in tweet.text.lower():
-            effectColor.clear()
-            effectColor.append(blue)
-            print(effectColor[0])
-      print('Current Color: ' + str(effectColor[0]))
-      time.sleep(5)
+      print(tweet.data)
+      if '!red' in tweet.text.lower():
+         effectColor.clear()
+         effectColor.append(red)
+      elif '!green' in tweet.text.lower():
+         effectColor.clear()
+         effectColor.append(green)
+      elif '!blue' in tweet.text.lower():
+         effectColor.clear()
+         effectColor.append(blue)
+      elif '!off' in tweet.text.lower():
+         effectColor.clear()
+         effectColor.append(off)
+      else:
+         print("Twitter didn't tell me a color")
+
+      print('Color set to: ' + str(effectColor[0]))
+      time.sleep(1)
 
 
       if '!lights' in tweet.text.lower():
          if '!on' in tweet.text.lower():
-            ledOn(effectColor[0])
+            if effectColor[0] != off:
+               ledOn(effectColor[0])
+               print('Single led is on.')
+            elif effectColor == off:
+               api.update_status("You didn't specify a color! Please try again.")
          elif '!fullon' in tweet.text.lower():
             fullOn(effectColor[0])
+            print('All leds are on.')
          elif '!off' in tweet.text.lower():
             ledOff()
+            print('All leds are off.')
       else:
          print('TWITTER DIDNT TELL ME AN EFFECT')
          

@@ -71,7 +71,7 @@ def ledOff():
     currentEffectString.append('Lights are off')
     return effectColor, effectColorString
 
-ledOff()
+
 # def travelingPixel(colorvalue):
 #     currentEffectString.clear()
 #     currentEffectString.append('Pixel traveling...')
