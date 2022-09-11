@@ -5,7 +5,8 @@ import board
 import neopixel
 import time
 from light import *
-#test hello
+
+
 #initializes flask
 app = Flask(__name__)
 
