@@ -45,21 +45,21 @@ class MyStream(tweepy.StreamingClient):
       time.sleep(1)
 
 
-      if '!lights' in tweet.text.lower():
-         if '!on' in tweet.text.lower():
-            if effectColor[0] != off:
-               ledOn(effectColor[0])
-               print('Single led is on.')
-            elif effectColor == off:
-               api.update_status("You didn't specify a color! Please try again.")
-         elif '!fullon' in tweet.text.lower():
-            fullOn(effectColor[0])
-            print('All leds are on.')
-         elif '!off' in tweet.text.lower():
-            ledOff()
-            print('All leds are off.')
+
+      if '!on' in tweet.text.lower():
+         if effectColor[0] != off:
+            ledOn(effectColor[0])
+            print('Single led is on.')
+         elif effectColor == off:
+            api.update_status("You didn't specify a color! Please try again.")
+      elif '!fullon' in tweet.text.lower():
+         fullOn(effectColor[0])
+         print('All leds are on.')
+      elif '!off' in tweet.text.lower():
+         ledOff()
       else:
-         print('TWITTER DIDNT TELL ME AN EFFECT')
+         print('Twitter didnt tell me an effect')
+
          
       time.sleep(3)
 
