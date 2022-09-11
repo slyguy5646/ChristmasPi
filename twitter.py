@@ -1,3 +1,4 @@
+from light import *
 from keys import creds
 import tweepy
 import time
@@ -23,21 +24,33 @@ class MyStream(tweepy.StreamingClient):
       return print('Connected!')
    
    def on_tweet(self, tweet):
-      if tweet.referenced_tweets == None:
-         if '!lights' in tweet.text.lower():
-            if '!on' in tweet.text.lower():
-               print('on')
-            elif '!off' in tweet.text.lower():
-               print('off')
-         else:
-            print('TWITTER DIDNT TELL ME AN EFFECT')
-         if '!color' in tweet.text.lower():
-            if '!red' in tweet.text.lower():
-               print('red')
-            elif '!green' in tweet.text.lower():
-               print('green')
-            elif '!blue' in tweet.text.lower():
-               print('blue')
+      if '!color' in tweet.text.lower():
+         if '!red' in tweet.text.lower():
+            effectColor.clear()
+            effectColor.append(red)
+            print(effectColor[0])
+         elif '!green' in tweet.text.lower():
+            effectColor.clear()
+            effectColor.append(green)
+            print(effectColor[0])
+         elif '!blue' in tweet.text.lower():
+            effectColor.clear()
+            effectColor.append(blue)
+            print(effectColor[0])
+      print('Current Color: ' + str(effectColor[0]))
+      time.sleep(5)
+
+
+      if '!lights' in tweet.text.lower():
+         if '!on' in tweet.text.lower():
+            ledOn(effectColor[0])
+         elif '!fullon' in tweet.text.lower():
+            fullOn(effectColor[0])
+         elif '!off' in tweet.text.lower():
+            ledOff()
+      else:
+         print('TWITTER DIDNT TELL ME AN EFFECT')
+         
       time.sleep(3)
 
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])
