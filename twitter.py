@@ -1,5 +1,7 @@
+from collections import UserList
 from multiprocessing.connection import Client
 from light import *
+from set import setColor
 from keys import creds
 import tweepy
 import time
@@ -11,38 +13,36 @@ auth = tweepy.OAuth1UserHandler(creds['API_KEY'], creds['API_KEY_SECRET'], creds
 # Create API object
 api = tweepy.API(auth)
 
-tweets = []
+# tweets = []
 
-def appendTweet(tweet):
-   tweets.append(tweet)
-   return tweets
+# def appendTweet(tweet):
+#    tweets.append(tweet)
+#    return tweets
 
 
+
+statusTweet = f"The leds are now { effectColor[0] } and { currentEffectString }"
 commands = ['@pi_lights']
-userIdList = []
+userList = []
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
       return print('Connected!')
    
    def on_tweet(self, tweet):
-      userIdList.clear()
-      userId = api.mentions_timeline()
-      for user in userId:
-         userIdList.append(user.user.screen_name)
-      print(str(userIdList[0]) + ' - ' + tweet.text)
+      userList.clear()
+      mentions = api.mentions_timeline()
+      for mention in mentions:
+         userList.append(mention.user.screen_name)
+      print(str(userList[0]) + ' - ' + tweet.text)
       if '!red' in tweet.text.lower():
-         effectColor.clear()
-         effectColor.append(red)
+         setColor(red)
       elif '!green' in tweet.text.lower():
-         effectColor.clear()
-         effectColor.append(green)
+         setColor(green)
       elif '!blue' in tweet.text.lower():
-         effectColor.clear()
-         effectColor.append(blue)
+         setColor(blue)
       elif '!off' in tweet.text.lower():
-         effectColor.clear()
-         effectColor.append(off)
+         setColor(off)
       else:
          print("Twitter didn't tell me a color")
 
@@ -52,16 +52,17 @@ class MyStream(tweepy.StreamingClient):
 
 
       if '!on' in tweet.text.lower():
-         if effectColor[0] != off:
-            ledOn(effectColor[0])
-            print('Single led is on.')
-         elif effectColor == off:
-            api.update_status("You didn't specify a color! Please try again.")
+         ledOn(effectColor[0])
+         pixels.show()
+         print('Single led is on.')
+         client.create_tweet(text=statusTweet)
       elif '!fullon' in tweet.text.lower():
          fullOn(effectColor[0])
+         pixels.show()
          print('All leds are on.')
       elif '!off' in tweet.text.lower():
          ledOff()
+         pixels.show()
       else:
          print('Twitter didnt tell me an effect')
 

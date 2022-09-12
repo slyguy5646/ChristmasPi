@@ -5,6 +5,7 @@ import board
 import neopixel
 import time
 from light import *
+from set import setColor
 
 
 #initializes flask
@@ -17,13 +18,13 @@ def index():
     if request.method == 'POST':
         #check if red color button was pressed
         if request.form.get('Red') == 'red':
-             setRed()
+             setColor(red)
         #check if green color button was pressed
         elif request.form.get('Green') == 'green':
-            setGreen()
+            setColor(green)
         #check if blue color button was pressed
         elif request.form.get('Blue') == 'blue':
-            setBlue()
+            setColor(blue)
         #check if ledOn button was was pressed
         elif request.form.get('ledOn') == 'FirstON':
                 ledOn(effectColor[0])
