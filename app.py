@@ -46,7 +46,12 @@ def index():
     elif request.method == 'GET':
         return render_template('index.html')
     
-    return render_template('index.html', colorString = effectColorString[0], effectString = currentEffectString[0], statusString = status[0])
+    return render_template(
+        'index.html', 
+        colorString = effectColorString[0], 
+        effectString = currentEffectString[0], 
+        statusString = status[0]
+    )
 
 @app.route('/colorerror')
 def colorError():
