@@ -1,3 +1,4 @@
+from multiprocessing.connection import Client
 from light import *
 from keys import creds
 import tweepy
@@ -18,14 +19,18 @@ def appendTweet(tweet):
 
 
 commands = ['@pi_lights']
-userId = []
+userIdList = []
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
       return print('Connected!')
    
    def on_tweet(self, tweet):
-      print(tweet.data)
+      userIdList.clear()
+      userId = api.mentions_timeline()
+      for user in userId:
+         userIdList.append(user.user.screen_name)
+      print(str(userIdList[0]) + ' - ' + tweet.text)
       if '!red' in tweet.text.lower():
          effectColor.clear()
          effectColor.append(red)
@@ -70,3 +75,10 @@ for command in commands:
    stream.add_rules(tweepy.StreamRule(command))
 
 stream.filter()   
+
+# tweet = []
+# hihihi = api.mentions_timeline()
+
+# for mention in hihihi:
+
+#    print(mention.user.screen_name)
