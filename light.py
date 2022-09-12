@@ -8,11 +8,6 @@ from set import *
 pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 
 
-def setStatus(statusArg):
-    status.clear()
-    status.append(statusArg)
-
-
 #function to turn all leds off except the first which will glow green
 def ledOn(colorvalue):
     pixels.fill((off))

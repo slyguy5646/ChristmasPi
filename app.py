@@ -5,7 +5,7 @@ import board
 import neopixel
 import time
 from light import *
-from set import setColor
+from set import *
 
 
 #initializes flask

@@ -9,6 +9,9 @@ effectColorString = ['off']
 currentEffectString = ['off']
 status = ['off']
 
+def setStatus(statusArg):
+    status.clear()
+    status.append(statusArg)
 
 def setColor(color):
    effectColor.clear()
