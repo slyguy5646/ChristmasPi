@@ -41,7 +41,7 @@ class MyStream(tweepy.StreamingClient):
          print("Twitter didn't tell me a color")
 
       print('Color set to: ' + str(effectColor[0]))
-      currentColor = effectColor[0]
+      currentColor = effectColorString[0]
       currentEffect = currentEffectString[0]
 
       time.sleep(1)
