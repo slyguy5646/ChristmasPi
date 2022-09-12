@@ -40,19 +40,15 @@ class MyStream(tweepy.StreamingClient):
       else:
          print("Twitter didn't tell me a color")
 
-      print('Color set to: ' + str(effectColor[0]))
-      currentColor = effectColorString[0]
-      currentEffect = currentEffectString[0]
 
+      print('Color set to: ' + str(effectColor[0]))
       time.sleep(1)
-      statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
 
 
       if '!on' in tweet.text.lower():
          ledOn(effectColor[0])
          pixels.show()
          print('Single led is on.')
-         api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
       elif '!fullon' in tweet.text.lower():
          fullOn(effectColor[0])
          pixels.show()
@@ -64,6 +60,10 @@ class MyStream(tweepy.StreamingClient):
          print('Twitter didnt tell me an effect')
 
          
+      # currentColor = effectColorString[0]
+      # currentEffect = currentEffectString[0]
+      # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
+      # api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
       time.sleep(3)
 
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])

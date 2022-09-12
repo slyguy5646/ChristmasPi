@@ -13,6 +13,10 @@ def setStatus(statusArg):
     status.clear()
     status.append(statusArg)
 
+def setEffectString(effectString):
+   currentEffectString.clear()
+   currentEffectString.append(effectString)
+
 def setColor(color):
    effectColor.clear()
    effectColor.append(color)
