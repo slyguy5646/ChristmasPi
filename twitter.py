@@ -26,9 +26,9 @@ class MyStream(tweepy.StreamingClient):
       userList.clear()
       mentions = api.mentions_timeline()
       for mention in mentions:
+         print(mention.text)
          userList.append(mention.user.screen_name)
          userList.append(mention.id)
-      print(str(userList[0]) + ' - ' + tweet.text)
       if '!red' in tweet.text.lower():
          setColor(red)
       elif '!green' in tweet.text.lower():
@@ -41,6 +41,7 @@ class MyStream(tweepy.StreamingClient):
          print("Twitter didn't tell me a color")
 
 
+      # print(str(userList[0]) + ' - ' + tweet.text)
       print('Color set to: ' + str(effectColor[0]))
       time.sleep(1)
 
@@ -63,7 +64,7 @@ class MyStream(tweepy.StreamingClient):
       # currentColor = effectColorString[0]
       # currentEffect = currentEffectString[0]
       # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
-      # api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
+      # # api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
       time.sleep(3)
 
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])
