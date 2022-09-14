@@ -27,7 +27,7 @@ class MyStream(tweepy.StreamingClient):
       mentions = api.mentions_timeline()
 
       for mention in mentions:
-         print(mention.text)
+         # print(mention.text)
          userList.append(mention.user.screen_name)
          userList.append(mention.id)
       if '!red' in tweet.text.lower():
@@ -59,6 +59,7 @@ class MyStream(tweepy.StreamingClient):
       elif '!off' in tweet.text.lower():
          ledOff()
          pixels.show()
+         print('LEDs are off')
       else:
          api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
 
