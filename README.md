@@ -1,4 +1,2 @@
 # christmaslightcontrol
-Control WS2811 neopixel christmas lights connected to a raspberry pi through:
--A twitter bot
--A flask web app
+Control WS2811 neopixel lights through the web (twitter and flask app)
