@@ -16,7 +16,7 @@ api = tweepy.API(auth)
 
 commands = ['@pi_lights']
 userList = ['fillerSoPythonDoesntYellAtMe']
-statusTweet = []
+statusTweet = ['Are you sure you specified an effect? Please try again', 'Are you sure you specified a color? Please try again.']
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
@@ -25,6 +25,7 @@ class MyStream(tweepy.StreamingClient):
    def on_tweet(self, tweet):
       userList.clear()
       mentions = api.mentions_timeline()
+
       for mention in mentions:
          print(mention.text)
          userList.append(mention.user.screen_name)
@@ -38,7 +39,8 @@ class MyStream(tweepy.StreamingClient):
       elif '!off' in tweet.text.lower():
          setColor(off)
       else:
-         print("Twitter didn't tell me a color")
+         api.update_status(status=statusTweet[1], in_reply_to_status_id=userList[1])
+
 
 
       # print(str(userList[0]) + ' - ' + tweet.text)
@@ -58,7 +60,7 @@ class MyStream(tweepy.StreamingClient):
          ledOff()
          pixels.show()
       else:
-         print('Twitter didnt tell me an effect')
+         api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
 
          
       # currentColor = effectColorString[0]
@@ -73,4 +75,5 @@ stream = MyStream(bearer_token=creds['BEARER_TOKEN'])
 for command in commands:
    stream.add_rules(tweepy.StreamRule(command))
 
-stream.filter()   
+stream.filter() 
+  
