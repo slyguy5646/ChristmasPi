@@ -10,9 +10,21 @@ api = tweepy.API(auth)
 
 
 
+#all of the text tweets from the current session
+piTweetIds = [0] 
 
-
+#filter words
 commands = ['@pi_lights']
-userList = ['fillerSoPythonDoesntYellAtMe']
-statusTweet = ['Are you sure you specified an effect? Please try again', 'Are you sure you specified a color? Please try again.']
+
+#gets user screen name and id from tweet
+userList = ['hi', 'hello'] 
+
+#different error messages that can be sent
+statusTweet = ['Are you sure you specified an effect? Please try again.', 'Are you sure you specified a color? Please try again.']
 tweetList = [0]
+
+#this value is assigned in the on_tweet. It is stored for use in an error message until the next tweet.
+tweetIdForReply = [0] 
+
+#tweet.text and tweet.id key value pair for use in checking if that tweet has already been sent by @PI_LIGHTS
+tweetTextId = {0:0}

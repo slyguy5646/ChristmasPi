@@ -7,7 +7,7 @@ from set import setColor, effectColor
 from keys import creds
 import tweepy
 import time
-from delete import tweetOrDelete, checkTweet
+from delete import tweetOrDelete
 from lists import *
 
 
@@ -17,16 +17,32 @@ def reply(msg, usr):
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
+      if piTweetIds[0] != 0:
+         for i in piTweetIds:
+            api.destroy_status(i)
+      else:
+         pass
+      piTweetIds.clear()
       return print('Connected!')
    
    def on_tweet(self, tweet):
+      #adds tweets id to tweetIdForReply in case it is needed for an error message
+      tweetIdForReply.clear()
+      tweetIdForReply.append(tweet.id)
+
+      #adds tweet.text and tweet.id as key value pair to check if that tweet has already been sent 
+      tweetTextId[tweet.text] = tweet.id
       userList.clear()
+
+      #gets list of mentions
       mentions = api.mentions_timeline()
 
+      #goes through mentions and adds their username and userid to userList
       for mention in mentions:
          userList.append(mention.user.screen_name)
          userList.append(mention.id)
-         
+
+      #prints user's username and user id   
       print(str(userList[-2]) + ' ' + str(userList[-1]))
 
       if '!red' in tweet.text.lower():
@@ -36,41 +52,46 @@ class MyStream(tweepy.StreamingClient):
       elif '!blue' in tweet.text.lower():
          setColor(blue)
       elif '!off' in tweet.text.lower():
-         pass
+         setColor(off)
+      else:
+         setColor(off)
 
 
 
-      # print(str(userList[0]) + ' - ' + tweet.text)
-      print('Color set to: ' + str(effectColor[0]))
+      
+      #print('Color set to: ' + str(effectColor[0]))
       time.sleep(1)
 
-
-      if '!on' in tweet.text.lower():
-         ledOn(effectColor[0])
-         pixels.show()
-         print('Single led is on.')
-      elif '!fullon' in tweet.text.lower():
-         fullOn(effectColor[0])
-         pixels.show()
-         print('All leds are on.')
+      #if a color is set other than nothing
+      if effectColor[0] != off:
+         if '!on' in tweet.text.lower():
+            ledOn(effectColor[0])
+            pixels.show()
+            print('Single led is on.')
+         elif '!fullon' in tweet.text.lower():
+            fullOn(effectColor[0])
+            pixels.show()
+            print('All leds are on.')
       elif '!off' in tweet.text.lower():
          ledOff()
          pixels.show()
          print('LEDs are off')
+      
+      #tweet no color error message
       else:
-         tweetOrDelete(statusTweet[0], userList[-1])
+         tweetOrDelete(f'@{ userList[-2] } ' + statusTweet[0])
 
          
       # currentColor = effectColorString[0]
       # currentEffect = currentEffectString[0]
       # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
-      time.sleep(3)
+      time.sleep(.5)
 
+#initialize stream
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])
-
-
 for command in commands:
    stream.add_rules(tweepy.StreamRule(command))
 
+#start stream
 stream.filter() 
   
