@@ -1,22 +1,19 @@
 from collections import UserList
+from email import message
 from multiprocessing.connection import Client
+from delete import tweetOrDelete
 from light import *
-from set import setColor
+from set import setColor, effectColor
 from keys import creds
 import tweepy
 import time
-
-# Authenticate to Twitter
-client = tweepy.Client(creds['BEARER_TOKEN'], creds['API_KEY'], creds['API_KEY_SECRET'], creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])
-auth = tweepy.OAuth1UserHandler(creds['API_KEY'], creds['API_KEY_SECRET'], creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])
-
-# Create API object
-api = tweepy.API(auth)
+from delete import tweetOrDelete, checkTweet
+from lists import *
 
 
-commands = ['@pi_lights']
-userList = ['fillerSoPythonDoesntYellAtMe']
-statusTweet = ['Are you sure you specified an effect? Please try again', 'Are you sure you specified a color? Please try again.']
+def reply(msg, usr):
+   api.update_status(status = msg, in_reply_to_status_id = usr)
+
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
@@ -27,9 +24,11 @@ class MyStream(tweepy.StreamingClient):
       mentions = api.mentions_timeline()
 
       for mention in mentions:
-         # print(mention.text)
          userList.append(mention.user.screen_name)
          userList.append(mention.id)
+         
+      print(str(userList[-2]) + ' ' + str(userList[-1]))
+
       if '!red' in tweet.text.lower():
          setColor(red)
       elif '!green' in tweet.text.lower():
@@ -37,9 +36,7 @@ class MyStream(tweepy.StreamingClient):
       elif '!blue' in tweet.text.lower():
          setColor(blue)
       elif '!off' in tweet.text.lower():
-         setColor(off)
-      else:
-         api.update_status(status=statusTweet[1], in_reply_to_status_id=userList[1])
+         pass
 
 
 
@@ -61,13 +58,12 @@ class MyStream(tweepy.StreamingClient):
          pixels.show()
          print('LEDs are off')
       else:
-         api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
+         tweetOrDelete(statusTweet[0], userList[-1])
 
          
       # currentColor = effectColorString[0]
       # currentEffect = currentEffectString[0]
       # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
-      # # api.update_status(status=statusTweet[0], in_reply_to_status_id=userList[1])
       time.sleep(3)
 
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])
