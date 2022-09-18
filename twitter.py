@@ -105,6 +105,8 @@ class MyStream(tweepy.StreamingClient):
       # currentEffect = currentEffectString[0]
       # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
       time.sleep(.5)
+   def on_disconnect(self):
+      return print('Disconnected!')
 
 #initialize stream
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])

@@ -9,6 +9,7 @@ from set import *
 from color import *
 
 
+
 #initializes flask
 app = Flask(__name__)
 
@@ -57,6 +58,10 @@ def index():
                 pixels.show()
                 setStatus('ON')
                 #showMe()
+        elif request.form.get('TwitterOn') == 'twitteron':
+            stream.filter()
+        elif request.form.get('TwitterOff') == 'twitteroff':
+            stream.disconnect()
 
     elif request.method == 'GET':
         return render_template('index.html')
