@@ -1,13 +1,12 @@
+import tweepy
+import time
 from collections import UserList
 from email import message
 from multiprocessing.connection import Client
+from keys import creds
+from set import setColor
 from delete import tweetOrDelete
 from light import *
-from set import setColor, effectColor
-from keys import creds
-import tweepy
-import time
-from delete import tweetOrDelete
 from lists import *
 from color import *
 
