@@ -1,3 +1,3 @@
-from light import *
+from light import ledOff
 
 ledOff()
