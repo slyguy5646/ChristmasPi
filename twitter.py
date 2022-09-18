@@ -43,7 +43,7 @@ class MyStream(tweepy.StreamingClient):
          userList.append(mention.id)
 
       #prints user's username and user id   
-      print(str(userList[-2]) + ' ' + str(userList[-1]))
+      print(str(userList[-2]) + ' says: '  + tweet.text)
 
       if '!red' in tweet.text.lower():
          setColor(red)
@@ -67,11 +67,11 @@ class MyStream(tweepy.StreamingClient):
          if '!on' in tweet.text.lower():
             ledOn(effectColor[0])
             pixels.show()
-            print('Single led is on.')
+            print('Single led is on and ' + effectColorString[0] + '.')
          elif '!fullon' in tweet.text.lower():
             fullOn(effectColor[0])
             pixels.show()
-            print('All leds are on.')
+            print('All leds are on and ' + effectColorString[0] + '.')
       elif '!off' in tweet.text.lower():
          ledOff()
          pixels.show()
