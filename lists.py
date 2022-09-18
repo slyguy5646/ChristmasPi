@@ -1,6 +1,6 @@
 import tweepy
 from keys import creds
-
+from color import *
 # Authenticate to Twitter
 client = tweepy.Client(creds['BEARER_TOKEN'], creds['API_KEY'], creds['API_KEY_SECRET'], creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])
 auth = tweepy.OAuth1UserHandler(creds['API_KEY'], creds['API_KEY_SECRET'], creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])
@@ -9,6 +9,11 @@ auth = tweepy.OAuth1UserHandler(creds['API_KEY'], creds['API_KEY_SECRET'], creds
 api = tweepy.API(auth)
 
 
+#STATUS LISTS
+effectColor = [off]
+effectColorString = ['off']
+currentEffectString = ['off']
+status = ['off']
 
 #all of the text tweets from the current session
 piTweetIds = [0] 

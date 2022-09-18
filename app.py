@@ -6,6 +6,7 @@ import neopixel
 import time
 from light import *
 from set import *
+from color import *
 
 
 #initializes flask
@@ -16,15 +17,29 @@ app = Flask(__name__)
 #function to get the button input
 def index():
     if request.method == 'POST':
-        #check if red color button was pressed
-        if request.form.get('Red') == 'red':
+        if request.form.get('Red') == 'red':                    #RED
              setColor(red)
-        #check if green color button was pressed
-        elif request.form.get('Green') == 'green':
+        elif request.form.get('Green') == 'green':              #GREEN 
             setColor(green)
-        #check if blue color button was pressed
-        elif request.form.get('Blue') == 'blue':
+        elif request.form.get('Blue') == 'blue':                #BLUE
             setColor(blue)
+        elif request.form.get('Orange') == 'orange':            #ORANGE
+            setColor(orange)
+        elif request.form.get('Yellow') == 'yellow':            #YELLOW
+            setColor(yellow)    
+        elif request.form.get('LightGreen') == 'lightgreen':    #LIGHTGREEN
+            setColor(lightGreen)
+        elif request.form.get('PowderBlue') == 'powderblue':    #POWDERBLUE
+            setColor(powderBlue)
+        elif request.form.get('Purple') == 'purple':            #PURPLE
+            setColor(purple)
+        elif request.form.get('Pink') == 'pink':                #PINK
+            setColor(pink)
+
+
+
+
+
         #check if ledOn button was was pressed
         elif request.form.get('ledOn') == 'FirstON':
                 ledOn(effectColor[0])
@@ -32,7 +47,7 @@ def index():
         elif request.form.get('fullOn') == 'FULLON':
                 fullOn(effectColor[0])
         #checks if ledOff button was pressed
-        elif request.form.get('ledOff') == 'OFF':            
+        elif request.form.get('ledOff') == 'OFF':        
                 ledOff()
                 pixels.show()
                 setStatus('OFF')

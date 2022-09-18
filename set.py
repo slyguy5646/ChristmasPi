@@ -1,14 +1,6 @@
-#COLOR DEFENITIONS GRB
-off = (0, 0, 0)
-blue = (0, 0, 255)
-green = (255, 0, 0)
-red = (0, 255, 0)
+from color import *
+from lists import *
 
-#STATUS LISTS
-effectColor = [off]
-effectColorString = ['off']
-currentEffectString = ['off']
-status = ['off']
 
 #function to set status list for use in flask app
 def setStatus(statusArg):
@@ -21,21 +13,9 @@ def setEffectString(effectString):
    currentEffectString.append(effectString)
 
 #function to be called to set the color and all of the lists corresponding to color
-def setColor(color):
+def setColor(colorList):
+   list = colorList
    effectColor.clear()
-   effectColor.append(color)
-   if color == red:
-      effectColorString.clear()
-      effectColorString.append('red')
-   elif color == green:
-      effectColorString.clear()
-      effectColorString.append('green')
-   elif color == blue:
-      effectColorString.clear()
-      effectColorString.append('blue')
-   elif color == off:
-      effectColorString.clear()
-      effectColorString.append('none')
-   else:
-      effectColorString.clear()
-      effectColorString.append('a color')
+   effectColor.append(list[0])
+   effectColorString.clear()
+   effectColorString.append(list[1])

@@ -9,6 +9,7 @@ import tweepy
 import time
 from delete import tweetOrDelete
 from lists import *
+from color import *
 
 
 def reply(msg, usr):
@@ -45,14 +46,29 @@ class MyStream(tweepy.StreamingClient):
       #prints user's username and user id   
       print(str(userList[-2]) + ' says: '  + tweet.text)
 
-      if '!red' in tweet.text.lower():
+      if '!red' in tweet.text.lower():          #RED
          setColor(red)
-      elif '!green' in tweet.text.lower():
+      elif '!green' in tweet.text.lower():      #GREEN
          setColor(green)
-      elif '!blue' in tweet.text.lower():
+      elif '!blue' in tweet.text.lower():       #BLUE
          setColor(blue)
-      elif '!off' in tweet.text.lower():
-         setColor(off)
+      elif '!off' in tweet.text.lower():        #OFF
+         effectColor.clear()
+         effectColor.append(off)
+         effectColorString.clear()
+         effectColorString.append('off')
+      elif '!orange' in tweet.text.lower():     #ORANGE
+         setColor(orange)
+      elif '!yellow' in tweet.text.lower():     #YELLOW
+         setColor(yellow)
+      elif '!lightgreen' in tweet.text.lower(): #LIGHTGREEN
+         setColor(lightGreen)
+      elif '!powderblue' in tweet.text.lower(): #POWDERBLUE
+         setColor(powderBlue)
+      elif '!purple' in tweet.text.lower():     #PURPLE
+         setColor(purple)
+      elif '!pink' in tweet.text.lower():       #PINK
+         setColor(pink)
       else:
          setColor(off)
 
@@ -64,14 +80,17 @@ class MyStream(tweepy.StreamingClient):
 
       #if a color is set other than nothing
       if effectColor[0] != off:
+         #if the on command is received turn on one LED
          if '!on' in tweet.text.lower():
             ledOn(effectColor[0])
             pixels.show()
             print('Single led is on and ' + effectColorString[0] + '.')
+         #if the fullon command is received turn all LEDs on
          elif '!fullon' in tweet.text.lower():
             fullOn(effectColor[0])
             pixels.show()
             print('All leds are on and ' + effectColorString[0] + '.')
+      #if the off command is received turn all LEDs off
       elif '!off' in tweet.text.lower():
          ledOff()
          pixels.show()
