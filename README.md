@@ -1,1 +1,1 @@
-Control WS2811 neopixel lights through the web (twitter and flask app)
+Control WS2811 christmas lights thorugh a twitter bot and flask app
