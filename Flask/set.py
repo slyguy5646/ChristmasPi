@@ -1,5 +1,5 @@
-from color import *
-from lists import *
+from Lights.color import *
+from Twitter.lists import *
 
 
 #function to set status list for use in flask app

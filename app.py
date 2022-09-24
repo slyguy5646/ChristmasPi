@@ -4,9 +4,10 @@ import re
 import board
 import neopixel
 import time
-from light import *
-from set import *
-from color import *
+from Lights.light import *
+from Flask.set import *
+from Lights.color import *
+from Flask.flask_functions import checkForColorButtonPress, checkForEffects
 
 
 
@@ -18,47 +19,19 @@ app = Flask(__name__)
 #function to get the button input
 def index():
     if request.method == 'POST':
-        if request.form.get('Red') == 'red':                    #RED
-             setColor(red)
-        elif request.form.get('Green') == 'green':              #GREEN 
-            setColor(green)
-        elif request.form.get('Blue') == 'blue':                #BLUE
-            setColor(blue)
-        elif request.form.get('Orange') == 'orange':            #ORANGE
-            setColor(orange)
-        elif request.form.get('Yellow') == 'yellow':            #YELLOW
-            setColor(yellow)    
-        elif request.form.get('LightGreen') == 'lightgreen':    #LIGHTGREEN
-            setColor(lightGreen)
-        elif request.form.get('PowderBlue') == 'powderblue':    #POWDERBLUE
-            setColor(powderBlue)
-        elif request.form.get('Purple') == 'purple':            #PURPLE
-            setColor(purple)
-        elif request.form.get('Pink') == 'pink':                #PINK
-            setColor(pink)
+        #CHECK FOR IF COLOR BUTTONS WERE PRESSED
+        checkForColorButtonPress(red, 'Red', 'red')                              #RED
+        checkForColorButtonPress(green, 'Green', 'green')                        #GREEN
+        checkForColorButtonPress(blue, 'Blue', 'blue')                           #BLUE
+        checkForColorButtonPress(orange, 'Orange', 'orange')                     #ORANGE
+        checkForColorButtonPress(yellow, 'Yellow', 'yellow')                     #YELLOW
+        checkForColorButtonPress(lightGreen, 'LightGreen', 'lightgreen')         #LIGHTGREEN
+        checkForColorButtonPress(powderBlue, 'PowderBlue', 'powderblue')         #POWDERBLUE
+        checkForColorButtonPress(purple, 'Purple', 'purple')                     #PURPLE
+        checkForColorButtonPress(pink, 'Pink', 'pink')                           #PINK
 
-
-
-
-
-        #check if ledOn button was was pressed
-        elif request.form.get('ledOn') == 'FirstON':
-                ledOn(effectColor[0])
-        #checks if fullOn button was pressed
-        elif request.form.get('fullOn') == 'FULLON':
-                fullOn(effectColor[0])
-        #checks if ledOff button was pressed
-        elif request.form.get('ledOff') == 'OFF':        
-                ledOff()
-                pixels.show()
-                setStatus('OFF')
-        elif request.form.get('apply') == 'APPLY':
-   #             if bool(effectColor) == False:
-   #                 return '/colorerror'
-                pixels.show()
-                setStatus('ON')
-                #showMe()
-
+        #CHECK IF EFFECT BUTTONS WERE PRESSED
+        checkForEffects()
     elif request.method == 'GET':
         return render_template('index.html')
     
