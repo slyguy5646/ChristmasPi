@@ -63,18 +63,18 @@ class MyStream(tweepy.StreamingClient):
 
 #########################CHECK FOR EFFECTS##############################
       if effectColor[0] != off: #if color is anything but off...
-         checkForEffectTweet(ledOn(effectColor[0]), '!on', 'on', tweet, api)             #check for single on command
-         checkForEffectTweet(fullOn(effectColor[0]), '!fullon', 'all on', tweet, api)        #check for full on command
+         checkForEffectTweet(ledOn(effectColor[0]), '!on', 'on', tweet, api)                       #check for single on command
+         checkForEffectTweet(fullOn(effectColor[0]), '!fullon', 'all on', tweet, api)              #check for full on command
       elif effectColor[0] == off: #if color is off...
-         checkForEffectTweet(ledOff(), '!off', 'off', tweet, api)                         #check for off command
+         checkForEffectTweet(ledOff(), '!off', 'off', tweet, api)                                  #check for off command
       
       elif effectColor[0] != off or effectColor[0] == off and '!off' not in tweet.text.lower():
-         tweetOrDelete(f'@{ userList[-2] } ' + statusTweet[0])                #tweet no color error message
+         tweetOrDelete(f'@{ userList[-2] } ' + statusTweet[0])                                     #tweet no color error message
 ########################################################################
       time.sleep(.5)
 
    def on_disconnect(self):
-      api.update_profile(description="Pi Lights is sleeping 💤")              #change the bio of @pi_lights when the bot is offline
+      api.update_profile(description="Pi Lights is sleeping 💤")                                   #change the bio of @pi_lights when the bot is offline
       return print('Disconnected!')
 
 #initialize stream
