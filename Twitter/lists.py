@@ -1,6 +1,6 @@
 import tweepy
-from keys import creds
-from color import *
+from Twitter.keys import creds
+from Lights.color import *
 # Authenticate to Twitter
 client = tweepy.Client(creds['BEARER_TOKEN'], creds['API_KEY'], creds['API_KEY_SECRET'], creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])
 auth = tweepy.OAuth1UserHandler(creds['API_KEY'], creds['API_KEY_SECRET'], creds['ACCESS_TOKEN'], creds['ACCESS_TOKEN_SECRET'])

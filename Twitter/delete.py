@@ -1,4 +1,4 @@
-from lists import *
+from Twitter.lists import *
 
 #THE CODE BELOW GETS ALL OF THE IDS FROM @PI_LIGHTS TWEETS
 tweetsIds = api.user_timeline(user_id=creds['PI_LIGHTS_ID'])
