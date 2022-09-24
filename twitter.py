@@ -1,17 +1,12 @@
 import tweepy
 import time
-from collections import UserList
-from email import message
-from multiprocessing.connection import Client
 from Lights.light import *
-from Flask.set import setColor, effectColor
+from Flask.set import effectColor
 from Twitter.keys import creds
-import tweepy
-import time
 from Twitter.delete import tweetOrDelete
 from Twitter.lists import *
 from Lights.color import *
-from Twitter.twitter_functions import *
+from Twitter.twitter_functions import setList0, checkForColorTweet, checkForEffectTweet, checkForOffTweet
 
 
 def reply(msg, usr):
@@ -20,7 +15,7 @@ def reply(msg, usr):
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
-      api.update_profile(description='Pi Lights is Online! 🎄')
+      api.update_profile(description='Pi Lights is Online! 🎄') #change bio of @pi_lights when bot goes online
       if piTweetIds[0] != 0:
          for i in piTweetIds:
             api.destroy_status(i)
@@ -30,6 +25,7 @@ class MyStream(tweepy.StreamingClient):
       return print('Connected!')
    
    def on_tweet(self, tweet):
+      
       #adds tweets id to tweetIdForReply in case it is needed for an error message
       setList0(tweetIdForReply, tweet.id)
 
@@ -48,69 +44,44 @@ class MyStream(tweepy.StreamingClient):
       #prints user's username and user id   
       print(str(userList[-2]) + ' says: '  + tweet.text)
 
-      if '!red' in tweet.text.lower():          #RED
-         setColor(red)
-      elif '!green' in tweet.text.lower():      #GREEN
-         setColor(green)
-      elif '!blue' in tweet.text.lower():       #BLUE
-         setColor(blue)
-      elif '!off' in tweet.text.lower():        #OFF
-         setList0(effectColor, off)
-         setList0(effectColorString, 'off')
-      elif '!orange' in tweet.text.lower():     #ORANGE
-         setColor(orange)
-      elif '!yellow' in tweet.text.lower():     #YELLOW
-         setColor(yellow)
-      elif '!lightgreen' in tweet.text.lower(): #LIGHTGREEN
-         setColor(lightGreen)
-      elif '!powderblue' in tweet.text.lower(): #POWDERBLUE
-         setColor(powderBlue)
-      elif '!purple' in tweet.text.lower():     #PURPLE
-         setColor(purple)
-      elif '!pink' in tweet.text.lower():       #PINK
-         setColor(pink)
-      else:
-         setColor(off)
-
+#########################CHECK FOR COLORS###############################
+      checkForOffTweet(tweet)                                  #OFF
+      checkForColorTweet(red, '!red', tweet)                   #RED
+      checkForColorTweet(green, '!green', tweet)               #GREEN
+      checkForColorTweet(blue, '!blue', tweet)                 #BLUE
+      checkForColorTweet(orange, '!orange', tweet)             #ORANGE
+      checkForColorTweet(yellow, '!yellow', tweet)             #YELLOW
+      checkForColorTweet(lightGreen, '!lightgreen', tweet)     #LIGHTGREEN
+      checkForColorTweet(powderBlue, '!powderblue', tweet)     #POWDERBLUE
+      checkForColorTweet(purple, '!purple', tweet)             #PURPLE
+      checkForColorTweet(pink, '!pink', tweet)                 #PINK
+########################################################################
 
 
       
-      #print('Color set to: ' + str(effectColor[0]))
+      print('Color set to: ' + str(effectColor[0]))
       time.sleep(1)
 
-      #if a color the color is anything but off
-      if effectColor[0] != off:
-         #if the on command is received turn on one LED
-         if '!on' in tweet.text.lower():
-            ledOn(effectColor[0])
-            pixels.show()
-            print('Single led is on and ' + str(effectColorString[0]) + '.')
-         #if the fullon command is received turn all LEDs on
-         elif '!fullon' in tweet.text.lower():
-            fullOn(effectColor[0])
-            pixels.show()
-            print('All leds are on and ' + str(effectColorString[0]) + '.')
-      #if the off command is received turn all LEDs off
-      elif '!off' in tweet.text.lower():
-         ledOff()
-         pixels.show()
-         print('LEDs are off')
+#########################CHECK FOR EFFECTS##############################
+      if effectColor[0] != off: #if color is anything but off...
+         checkForEffectTweet(ledOn(effectColor[0]), '!on', 'on', tweet, api)             #check for single on command
+         checkForEffectTweet(fullOn(effectColor[0]), '!fullon', 'all on', tweet, api)        #check for full on command
+      elif effectColor[0] == off: #if color is off...
+         checkForEffectTweet(ledOff(), '!off', 'off', tweet, api)                         #check for off command
       
-      #tweet no color error message
-      else:
-         tweetOrDelete(f'@{ userList[-2] } ' + statusTweet[0])
-
-         
-      # currentColor = effectColorString[0]
-      # currentEffect = currentEffectString[0]
-      # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
+      elif effectColor[0] != off or effectColor[0] == off and '!off' not in tweet.text.lower():
+         tweetOrDelete(f'@{ userList[-2] } ' + statusTweet[0])                #tweet no color error message
+########################################################################
       time.sleep(.5)
+
    def on_disconnect(self):
-      api.update_profile(description="Pi Lights is sleeping 💤")
+      api.update_profile(description="Pi Lights is sleeping 💤")              #change the bio of @pi_lights when the bot is offline
       return print('Disconnected!')
 
 #initialize stream
 stream = MyStream(bearer_token=creds['BEARER_TOKEN'])
+
+#add filter rules (in this case only look for tweets that contain the @pi_lights handle in the body of the tweet)
 for command in commands:
    stream.add_rules(tweepy.StreamRule(command))
 
