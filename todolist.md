@@ -1,11 +1,11 @@
 #To Do List
-1. [ ] online and offline tweet
-    a. [ ] tweets out online it will also tweet out a list of commands and pin that tweet
-    b. [ ] tweets out when it's offline and pins that tweet
-    c. [ ] delete the last status tweet so there are no duplicates
-2. [ ] responses
-    a. [ ] reply to the user with the current status of the lights when they send a command
-    b. [ ] delete that tweet after a certain amount of time or when the next tweet comes in so there are no duplicates
+1. [x] online and offline bio change
+    a. [x] changes bio when online and adds a link with a list of commands to the bio
+    b. [x] changes bio to offline when the bot is offline
+    c. [x] show current status of the lights in the bio
+2. [ ] error message replies
+    a. [ ] reply with an error message if the user did something incorrectly
+    b. [ ] delete that error message after a certain amount of time
 3. [ ] clean up
     a. [ ] clean up variables and make the code look nice and readable
     b. [ ] comments
