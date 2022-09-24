@@ -16,10 +16,10 @@ def reply(msg, usr):
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
       api.update_profile(description='Pi Lights is Online! 🎄') #change bio of @pi_lights when bot goes online
-      if piTweetIds[0] != 0:
+      if piTweetIds[0] != 0: #if their are existing tweets from @pi_lights, delete them before starting up
          for i in piTweetIds:
             api.destroy_status(i)
-            
+
       piTweetIds.clear()
       return print('Connected!')
    
