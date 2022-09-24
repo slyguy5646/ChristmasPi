@@ -10,6 +10,7 @@ from Lights.color import *
 from Flask.flask_functions import checkForColorButtonPress, checkForEffects
 
 
+
 #initializes flask
 app = Flask(__name__)
 

@@ -31,4 +31,3 @@ def ledOff():
 def doNothing():
     print('I Did nothing!')
 
-
