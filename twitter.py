@@ -11,6 +11,7 @@ import time
 from Twitter.delete import tweetOrDelete
 from Twitter.lists import *
 from Lights.color import *
+from Twitter.twitter_functions import *
 
 
 def reply(msg, usr):
@@ -19,6 +20,7 @@ def reply(msg, usr):
 
 class MyStream(tweepy.StreamingClient):
    def on_connect(self):
+      api.update_profile(description='Pi Lights is Online! 🎄')
       if piTweetIds[0] != 0:
          for i in piTweetIds:
             api.destroy_status(i)
@@ -29,8 +31,7 @@ class MyStream(tweepy.StreamingClient):
    
    def on_tweet(self, tweet):
       #adds tweets id to tweetIdForReply in case it is needed for an error message
-      tweetIdForReply.clear()
-      tweetIdForReply.append(tweet.id)
+      setList0(tweetIdForReply, tweet.id)
 
       #adds tweet.text and tweet.id as key value pair to check if that tweet has already been sent 
       tweetTextId[tweet.text] = tweet.id
@@ -54,10 +55,8 @@ class MyStream(tweepy.StreamingClient):
       elif '!blue' in tweet.text.lower():       #BLUE
          setColor(blue)
       elif '!off' in tweet.text.lower():        #OFF
-         effectColor.clear()
-         effectColor.append(off)
-         effectColorString.clear()
-         effectColorString.append('off')
+         setList0(effectColor, off)
+         setList0(effectColorString, 'off')
       elif '!orange' in tweet.text.lower():     #ORANGE
          setColor(orange)
       elif '!yellow' in tweet.text.lower():     #YELLOW
@@ -79,18 +78,18 @@ class MyStream(tweepy.StreamingClient):
       #print('Color set to: ' + str(effectColor[0]))
       time.sleep(1)
 
-      #if a color is set other than nothing
+      #if a color the color is anything but off
       if effectColor[0] != off:
          #if the on command is received turn on one LED
          if '!on' in tweet.text.lower():
             ledOn(effectColor[0])
             pixels.show()
-            print('Single led is on and ' + effectColorString[0] + '.')
+            print('Single led is on and ' + str(effectColorString[0]) + '.')
          #if the fullon command is received turn all LEDs on
          elif '!fullon' in tweet.text.lower():
             fullOn(effectColor[0])
             pixels.show()
-            print('All leds are on and ' + effectColorString[0] + '.')
+            print('All leds are on and ' + str(effectColorString[0]) + '.')
       #if the off command is received turn all LEDs off
       elif '!off' in tweet.text.lower():
          ledOff()
@@ -107,6 +106,7 @@ class MyStream(tweepy.StreamingClient):
       # statusTweet.append(f"@{ userList[0] } The leds are now { currentColor } and { currentEffect }")
       time.sleep(.5)
    def on_disconnect(self):
+      api.update_profile(description="Pi Lights is sleeping 💤")
       return print('Disconnected!')
 
 #initialize stream

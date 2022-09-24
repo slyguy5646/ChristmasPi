@@ -1,5 +1,7 @@
-from Flask.set import setColor
+# def checkForColorTweet(colorToSet, colorCMD):
+#     if colorCMD in tweet.text.lower():
+#         setColor(colorToSet)
 
-def checkForColorTweet(colorToSet, colorMSG):
-    if colorMSG in tweet.text.lower():
-        setColor(colorToSet)
+def setList0(list, item_to_add):
+    list.clear()
+    list.append(item_to_add)
