@@ -28,4 +28,3 @@ def ledOff():
     setColor(off)
     setEffectString('off')
 
-

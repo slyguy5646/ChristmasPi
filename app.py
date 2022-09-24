@@ -58,10 +58,6 @@ def index():
                 pixels.show()
                 setStatus('ON')
                 #showMe()
-        elif request.form.get('TwitterOn') == 'twitteron':
-            stream.filter()
-        elif request.form.get('TwitterOff') == 'twitteroff':
-            stream.disconnect()
 
     elif request.method == 'GET':
         return render_template('index.html')
