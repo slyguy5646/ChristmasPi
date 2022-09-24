@@ -19,8 +19,7 @@ class MyStream(tweepy.StreamingClient):
       if piTweetIds[0] != 0:
          for i in piTweetIds:
             api.destroy_status(i)
-      else:
-         pass
+            
       piTweetIds.clear()
       return print('Connected!')
    
