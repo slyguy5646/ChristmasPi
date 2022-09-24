@@ -3,12 +3,14 @@ import time
 from collections import UserList
 from email import message
 from multiprocessing.connection import Client
-from keys import creds
-from set import setColor
-from delete import tweetOrDelete
-from light import *
-from lists import *
-from color import *
+from Lights.light import *
+from Flask.set import setColor, effectColor
+from Twitter.keys import creds
+import tweepy
+import time
+from Twitter.delete import tweetOrDelete
+from Twitter.lists import *
+from Lights.color import *
 
 
 def reply(msg, usr):
