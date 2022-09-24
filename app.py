@@ -9,6 +9,7 @@ from set import *
 from color import *
 
 
+
 #initializes flask
 app = Flask(__name__)
 
