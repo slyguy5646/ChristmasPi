@@ -3,11 +3,13 @@ import board
 import neopixel
 import time
 import os
-from Flask.set import *
+from Flask.set import setColor, setEffectString, setStatus
 from Lights.color import *
 
 #initializes strip on GPIO 18 with 50 LEDs on that strip
-pixels = neopixel.NeoPixel(board.D18, n=50, brightness=0.5, auto_write=False, pixel_order='RGB')
+num_pixels = 50
+pixels = neopixel.NeoPixel(board.D18, n=num_pixels, brightness=0.5, auto_write=False, pixel_order='RGB')
+ORDER = neopixel.RGB
 
 
 #function to turn all leds off except the first which will glow green
