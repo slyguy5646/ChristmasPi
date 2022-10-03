@@ -13,6 +13,7 @@
 Future Ideas:
 
 1. FM transmitter/lights dancing to music system
+ maybe try: https://github.com/rm-hull/pifm
 2. use spotify API to get songs/have a playlist constantly running
 3. if user tweets valid spotify link at the bot, the bot will override the currently playing song and play that song 
 and make the lights dance to it then the music will return to where it left off in the playlist 
