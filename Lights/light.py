@@ -5,6 +5,7 @@ import time
 import os
 from Flask.set import setColor, setEffectString, setStatus
 from Lights.color import *
+from Twitter.lists import currentEffectString, twinkleToggle
 
 #initializes strip on GPIO 18 with 50 LEDs on that strip
 num_pixels = 50
@@ -33,3 +34,17 @@ def ledOff():
 def doNothing():
     print('I Did nothing!')
 
+def flashPurpOrange(boolean):
+    while boolean:
+        pixels.fill(orange[0])
+        pixels.show()
+        time.sleep(1)
+        pixels.fill(purple[0])
+        pixels.show()
+        time.sleep(1)
+        if currentEffectString == 'off':
+            boolean = False
+    if boolean == False:
+        ledOff()
+
+#flashPurpOrange()

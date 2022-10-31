@@ -1,3 +1,4 @@
-from Lights.light import ledOff
+from light import pixels
 
-ledOff()
+pixels.fill((0, 0, 0))
+pixels.write()

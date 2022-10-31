@@ -14,6 +14,7 @@ effectColor = [off]
 effectColorString = ['off']
 currentEffectString = ['off']
 status = ['off']
+whileEffectList = [0]
 
 #all of the text tweets from the current session
 piTweetIds = [0] 

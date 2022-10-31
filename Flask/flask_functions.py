@@ -1,7 +1,9 @@
+from curses import flash
 from flask import request
 from Lights.light import doNothing
 from Flask.set import setColor
 from Lights.light import *
+from Twitter.lists import *
 
 def checkForColorButtonPress(colorToSet, btnName, btnValue):
     if request.form.get(btnName) == btnValue:         
@@ -21,8 +23,14 @@ def checkForEffects():
         elif request.form.get('FullOn') == 'fullon':
                 fullOn(effectColor[0])
         #checks if ledOff button was pressed
-        elif request.form.get('LedOff') == 'ledoff':        
+        elif request.form.get('Twinkle') == 'twinkle':
+                twinkleToggle = True
+                print(twinkleToggle)
+                flashPurpOrange(twinkleToggle)
+                
+        elif request.form.get('LedOff') == 'ledoff':  
                 ledOff()
+                flashPurpOrange(twinkleToggle)
                 pixels.show()
                 setStatus('OFF')
         elif request.form.get('Apply') == 'apply':
