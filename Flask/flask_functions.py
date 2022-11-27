@@ -23,14 +23,9 @@ def checkForEffects():
         elif request.form.get('FullOn') == 'fullon':
                 fullOn(effectColor[0])
         #checks if ledOff button was pressed
-        elif request.form.get('Twinkle') == 'twinkle':
-                twinkleToggle = True
-                print(twinkleToggle)
-                flashPurpOrange(twinkleToggle)
                 
         elif request.form.get('LedOff') == 'ledoff':  
                 ledOff()
-                flashPurpOrange(twinkleToggle)
                 pixels.show()
                 setStatus('OFF')
         elif request.form.get('Apply') == 'apply':
@@ -39,3 +34,6 @@ def checkForEffects():
                 pixels.show()
                 setStatus('ON')
                 #showMe()
+        elif request.form.get('RedGreen') == 'redgreen':
+                redGreen()
+                setStatus('ON')

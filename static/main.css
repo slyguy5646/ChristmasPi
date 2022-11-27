@@ -6,7 +6,6 @@
 
 
 input[type=text] {
-    padding:5px; 
     border:2px solid #ccc; 
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -16,12 +15,76 @@ input[type=text]:focus {
     border-color:#333;
 }
 
-input[type=submit] {
+.colors input[type=submit] {
+    text-align: center;
+    
+    width: 20px;
     padding:5px 15px; 
-    background:#ccc; 
     border:0 none;
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
+}
+
+.red{
+    background: red;
+    color: red;
+}
+
+.green{
+    background: green;
+    color: green;
+}
+
+.blue{
+    background: blue;
+    color: blue;
+
+}
+
+.orange{
+    background: orange;
+    color: orange;
+
+
+}
+
+.yellow{
+    background: yellow;
+    color: yellow;
+
+
+
+}
+
+.lightgreen{
+    background: greenyellow;
+    color: greenyellow;
+
+
+
+}
+
+.powderblue{
+    background: cyan;
+    color: cyan;
+
+}
+
+.purple{
+    background: purple;
+    color: purple;
+
+
+    text-align: center;
+
+}
+
+.pink{
+    background: pink;
+    color: pink;
+
+
+
 }
 
