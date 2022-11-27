@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Control Server</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <div class="divparent">
+            <h1 class="title">Pi Control Panel</h1>
+            <h1 class="color">Current color: {{ colorString }}</h1>
+            <h1 class="effect">Current effect: {{ effectString }}</h1>
+            <h1 class="status">LED Status: {{ statusString }}</h1>
+            <form method="post" action="/">
+                <div class="colors">
+                    <input class="red" type="submit" value="red" name="Red">
+                    <input class="green" type="submit" value="green" name="Green">
+                    <input class="blue" type="submit" value="blue" name="Blue">
+                    <input class="orange" type="submit" value="orange" name="Orange">
+                    <input class="yellow" type="submit" value="yellow" name="Yellow">
+                    <input class="lightgreen" type="submit" value="lightgreen" name="LightGreen">
+                    <input class="powderblue" type="submit" value="powderblue" name="PowderBlue">
+                    <input class="purple" type="submit" value="purple" name="Purple">
+                    <input class="pink" type="submit" value="pink" name="Pink">
+                </div>
+                
+                <br>
+                    <input class="ledon" type="submit" value="ledon" name="LedOn">
+                    <input class="fullon" type="submit" value="fullon" name="FullOn">
+                    <input class="redGreen" type="submit" value="redgreen" name="RedGreen">
+                </br>   
+                <br>
+                    <input class="offbtn" type="submit" value="ledoff" name="LedOff">
+                    <input class="applybtn" type="submit" value="apply" name="Apply">
+                </br>
+            </form>
+    </div>
+</body>
+</html>
