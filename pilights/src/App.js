@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DataPanel from './components/Data/Data';
 import Lights from './components/Lights/lights';
+import Colors from './components/ControlPanel/Colors/Colors';
 
 function App(){
 
@@ -20,8 +21,10 @@ function App(){
   return(
     <div>
 
-      {/* <DataPanel data={lightData}/> */}
+      <DataPanel data={lightData}/>
       <Lights/>
+
+      <Colors/>
     </div>
   );
 }

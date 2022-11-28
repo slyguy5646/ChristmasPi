@@ -73,6 +73,10 @@ def color():
     
     updateLightData(lightData, effectColor[0], effectColorString[0], currentEffectString[0], status[0])
     return jsonify(lightData)
+
+@app.route('/changecolor', methods=['POST'])
+def changecolor():
+    setColor()
     
 
     

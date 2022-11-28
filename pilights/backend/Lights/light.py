@@ -22,17 +22,24 @@ def ledOn(colorvalue):
 #function to turn all LEDs solid green
 def fullOn(colorValue):
     pixels.fill(colorValue)
-    setEffectString('All LEDs are on')
+    setEffectString('all on')
 
 #function to turn all LEDs off
 def ledOff():
     pixels.fill(off)
     setColor(off)
     setEffectString('off')
-    setStatus('Off')
+    setStatus('off')
 
 def doNothing():
     print('I Did nothing!')
+
+def ledMaster(color, effect):
+    if effect == "singleOn":
+        ledOn(color)
+    else if effect == "fullOn":
+        fullOn(color);
+    
 
 # def flashPurpOrange(boolean):
 #     while boolean:

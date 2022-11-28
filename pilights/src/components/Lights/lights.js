@@ -1,17 +1,62 @@
 import React, { useState, useEffect } from 'react';
+import './lights.scss';
 
 
 function Lights() {
+
+  const [active, setActive] = useState(true);
+
+  const root = document.documentElement;
+  root?.style.setProperty('--evensColor', active ? 'rgba(0,255,255,1)' : "white");
     return ( 
-        <div class="main">
-        <div class="circle red"></div>
-        <div class="circle yellow"></div>
-        <div class="circle blue"></div>
-        <div class="circle green"></div>
-        <div class="circle red"></div>
-        <div class="circle yellow"></div>
-        <div class="circle blue"></div>
-        <div class="circle green"></div>
+      <div className='lightsDiv'>
+
+        <ul class="lightrope">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <button className='lightbtn' onClick={function(){setActive(!active)}}>Toggle Lights</button>
       </div>
      );
 }
