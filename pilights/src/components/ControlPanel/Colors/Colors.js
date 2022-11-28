@@ -26,7 +26,7 @@ function Colors(){
 
     const [color, setColor] = useState({});
 
-
+    //trying to do dropdown
     const options = [
         'one', 'two', 'three'
       ];
