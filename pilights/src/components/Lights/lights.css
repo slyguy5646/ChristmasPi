@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: rgb(25, 21, 26);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  :root{
+    --redShadow: 0 0 20px 5px #c0392b;
+    --yellowShadow: 0 0 20px 5px #f1c40f
+    --blueShadow: 0 0 20px 5px #64fcfe
+    --greenShadow: 0 0 20px 5px #2ecc71
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  .main {
+    border-radius: 25px;
+    height: 20vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .circle {
+    display: flex;
+    margin: 1rem;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: 1s all ease;
+  }
+  
+  .circle:before {
+    position: absolute;
+    content: '';
+    height: 15px;
+    width: 15px;
+    left: 17.5px;
+    top: -15px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background: rgb(68, 53, 73);
+    border-radius: 2px;
+    display: inline-block;
+    border-bottom: 2px solid rgb(97, 81, 107);
+  }
+  
+  .circle:after {
+    position: absolute;
+    content: "";
+    top: -20px;
+    left: 30px;
+    position: absolute;
+    width: 70px;
+    height: 18.6666666667px;
+    border-bottom: solid #222 2px;
+    border-radius: 50%;
+  }
+  
+  
+  
+  .red {
+    background-color: #c0392b;
+    animation: glow-1 1s infinite;
+  /*   box-shadow: var(--redShadow); */
+  
+  }
+  
+  .yellow {
+    background-color: #f1c40f;
+    animation: glow-2 1s infinite;
+  /*   box-shadow: var(--yellowShadow); */
+  }
+  
+  .blue {
+    background-color: #64fcfe;
+    animation: glow-3 1s infinite;
+    box-shadow: var(--blueShadow);
+  }
+  
+  .green {
+    background-color: #2ecc71;
+    animation: glow-4 1s infinite;
+  }
+  
+  
+  
