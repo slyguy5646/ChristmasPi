@@ -23,6 +23,8 @@ def ledOn(colorvalue):
 def fullOn(colorValue):
     pixels.fill(colorValue)
     setEffectString('all on')
+    print(f'all leds on {colorValue}')
+    pixels.show()
 
 #function to turn all LEDs off
 def ledOff():
@@ -34,11 +36,14 @@ def ledOff():
 def doNothing():
     print('I Did nothing!')
 
-def ledMaster(color, effect):
-    if effect == "singleOn":
-        ledOn(color)
-    else if effect == "fullOn":
-        fullOn(color);
+def ledMaster(incomingObj):
+    ledChanges = incomingObj
+    if ledChanges['effect'] == "singleOn":
+        ledOn(ledChanges['color'])
+        print('single light on')
+    elif ledChanges['effect'] == "fullOn":
+        fullOn(ledChanges['color'])
+        print(f"all lights on {ledChanges['color']}")
     
 
 # def flashPurpOrange(boolean):
@@ -72,3 +77,4 @@ def redGreen():
     pixels.show()
 
 # redGreen()
+# pixels.fill(green[0])

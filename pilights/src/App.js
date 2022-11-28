@@ -3,28 +3,26 @@ import DataPanel from './components/Data/Data';
 import Lights from './components/Lights/lights';
 import Colors from './components/ControlPanel/Colors/Colors';
 
-function App(){
+function App() {
 
   const [lightData, setLightData] = useState({});
 
-   useEffect(() => {
-      const hello = fetch('http://192.168.1.214:5000/lightdata')
-         .then(res => res.json()).then(response => setLightData(response))
 
-   }, []);
+  console.log(lightData);
 
-   console.log(lightData);
-
-
+  function getData(setFunc) {
+    const hello = fetch('http://192.168.1.214:5000/lightdata')
+      .then(res => res.json()).then(response => setFunc(response))
+  }
 
 
-  return(
+  return (
     <div>
 
-      <DataPanel data={lightData}/>
-      <Lights/>
+      <DataPanel data={lightData} setData={setLightData} getData={getData} />
+      <Colors data={lightData} setData={setLightData} getData={getData}/>
+      <Lights />
 
-      <Colors/>
     </div>
   );
 }

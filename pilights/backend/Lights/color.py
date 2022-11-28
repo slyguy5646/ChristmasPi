@@ -1,6 +1,6 @@
 #COLOR DEFENITIONS RGB
 off = (0, 0, 0)
-green = [(0, 255, 0), 'green']
+green = [[0, 255, 0], 'green']
 red = [(255, 0, 0), 'red']
 blue = [(0, 0, 255), 'blue']
 

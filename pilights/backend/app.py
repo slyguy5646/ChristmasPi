@@ -4,12 +4,13 @@ import re
 import board
 import neopixel
 import time
-from Lights.light import *
+from Lights.light import ledOn, fullOn, ledMaster, doNothing, ledOff, pixels, redGreen
 from Flask.set import *
 from Lights.color import *
 from Flask.flask_functions import checkForColorButtonPress, checkForEffects, updateLightData
 from Twitter.lists import *
 from flask_cors import CORS
+import json
 
 
 
@@ -76,9 +77,25 @@ def color():
 
 @app.route('/changecolor', methods=['POST'])
 def changecolor():
-    setColor()
-    
+    if request.method == 'POST':
+        data = request.data
+        formattedData = json.loads(data.decode('utf-8'))
+        setColor(formattedData['color'])
+        updateLightData(lightData, effectColor[0], effectColorString[0], currentEffectString[0], status[0])
+        # ledMaster(formattedData)
+        print(effectColor[0])
 
+        
+        print(formattedData)
+        updateLightData(lightData, effectColor[0], effectColorString[0], currentEffectString[0], status[0])
+        return  {'good': 200}
+
+@app.route('/togglefullon')
+def toggle():
+    if request.method == 'GET':
+        fullOn(effectColor[0])
+        print(f'lights are on and {effectColor[0]}')
+        return jsonify({'good': 200})
     
 
 
