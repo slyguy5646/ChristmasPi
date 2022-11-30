@@ -5,7 +5,7 @@ import time
 import os
 from Flask.set import setColor, setEffectString, setStatus
 from Lights.color import *
-from Twitter.lists import currentEffectString
+from Twitter.lists import currentEffectString, effectColor
 
 #initializes strip on GPIO 18 with 50 LEDs on that strip
 num_pixels = 100 #number of leds on the strand
@@ -24,7 +24,7 @@ def fullOn(colorValue):
     pixels.fill(colorValue)
     setEffectString('all on')
     print(f'all leds on {colorValue}')
-    pixels.show()
+    # pixels.show()
 
 #function to turn all LEDs off
 def ledOff():
@@ -76,6 +76,14 @@ def redGreen():
         pixels[k] = green[0]
 
     pixels.show()
+
+def doEffect(effectName):
+    if effectName == 'fullOn':
+        fullOn(effectColor[0])
+        pixels.show()
+    elif effectName == 'ledOff':
+        ledOff()
+        pixels.show()
 
 # redGreen()
 # pixels.fill(green[0])

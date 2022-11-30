@@ -19,3 +19,6 @@ def setColor(colorList):
    effectColor.append(list[0])
    effectColorString.clear()
    effectColorString.append(list[1])
+
+def setFrontEndColor(colorString):
+   setColor(colorsObj[colorString])

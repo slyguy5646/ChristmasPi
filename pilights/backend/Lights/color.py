@@ -14,3 +14,16 @@ pink = [(255, 0, 255), 'pink']
 
 colorCodes = [off, green[1], red[1], blue[1], orange[1], yellow[1], lightGreen[1], powderBlue[1], purple[1], pink[1]]
 
+
+colorsObj = {
+    'off': off,
+    'red': red,
+    'green': green, 
+    'blue': blue,
+    'orange': orange,
+    'yellow': yellow,
+    'lightGreen': lightGreen,
+    'powderBlue': powderBlue,
+    'purple': purple,
+    'pink': pink
+}

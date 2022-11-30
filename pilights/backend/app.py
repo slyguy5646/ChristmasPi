@@ -4,7 +4,7 @@ import re
 import board
 import neopixel
 import time
-from Lights.light import ledOn, fullOn, ledMaster, doNothing, ledOff, pixels, redGreen
+from Lights.light import ledOn, fullOn, ledMaster, doNothing, ledOff, pixels, redGreen, doEffect
 from Flask.set import *
 from Lights.color import *
 from Flask.flask_functions import checkForColorButtonPress, checkForEffects
@@ -71,33 +71,51 @@ def color_data():
     updateLightData()
     return jsonify(lightData)
 
-@app.route('/red')
-def changecolor(): 
-    setColor(red)
-    print('color is red')
+# @app.route('/red')
+# def changecolor(): 
+#     setColor(red)
+#     print('color is red')
 
-    updateLightData()
-    print(lightData)
-    return  jsonify(lightData)
+#     updateLightData()
+#     print(lightData)
+#     return  jsonify(lightData)
 
-@app.route('/on')
-def toggle():
-    if request.method == 'GET':
+# @app.route('/on')
+# def toggle():
+#     if request.method == 'GET':
        
-        fullOn(effectColor[0])
-        print(f'lights are on and {effectColor[0]}')
-        updateLightData()
-        setStatus('ON')
-        # print(status)
-        print(lightData)
-        return jsonify(lightData)
+#         fullOn(effectColor[0])
+#         print(f'lights are on and {effectColor[0]}')
+#         updateLightData()
+#         setStatus('ON')
+#         # print(status)
+#         print(lightData)
+#         return jsonify(lightData)
     
-@app.route('/off')
-def off():
-    if request.method == 'GET':
-        ledOff()
-        updateLightData()
-        return jsonify(lightData)
+# @app.route('/off')
+# def off():
+#     if request.method == 'GET':
+#         ledOff()
+#         updateLightData()
+#         return jsonify(lightData)
+
+
+@app.route('/lights', methods=['POST'])
+def lights():
+    if request.method == 'POST':
+        # print(request.data)
+        incomingLightData = json.loads(request.data)
+        print(incomingLightData)
+
+        setFrontEndColor(incomingLightData['color'])
+        doEffect(incomingLightData['effect'])
+        setStatus(incomingLightData['status'])
+        # print(incomingLightData['color'])
+        print('Color: ' + str(effectColor[0]))
+        print('Color name: ' + str(effectColorString[0]))
+        print('Current Effect: ' + currentEffectString[0])
+        print('Status: ' + status[0])
+    return jsonify({"good": 200})
 
 
 if __name__ == '__main__':
