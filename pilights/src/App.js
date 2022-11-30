@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import DataPanel from './components/Data/Data';
-import Lights from './components/Lights/lights';
-import Colors from './components/ControlPanel/Colors/Colors';
+import Lights from './components/lights';
+
 
 function App() {
 
@@ -18,9 +17,8 @@ function App() {
 
   return (
     <div>
+      <h1>{lightData.color}</h1>
 
-      <DataPanel data={lightData} setData={setLightData} getData={getData} />
-      <Colors data={lightData} setData={setLightData} getData={getData}/>
       <Lights />
 
     </div>

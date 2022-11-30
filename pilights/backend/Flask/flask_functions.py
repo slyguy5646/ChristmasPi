@@ -7,11 +7,7 @@ from Twitter.lists import *
 
 
 
-def updateLightData(objToChagne, colorData, colorStringData, effectData, statusData):
-    objToChagne["color"] = colorData
-    objToChagne["colorString"] = colorStringData
-    objToChagne["effect"] = effectData
-    objToChagne["status"] = statusData
+
 
 
 def checkForColorButtonPress(colorToSet, btnName, btnValue):

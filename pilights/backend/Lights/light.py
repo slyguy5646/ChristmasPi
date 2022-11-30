@@ -32,6 +32,7 @@ def ledOff():
     setColor(off)
     setEffectString('off')
     setStatus('off')
+    pixels.show()
 
 def doNothing():
     print('I Did nothing!')
