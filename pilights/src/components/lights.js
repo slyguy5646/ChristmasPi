@@ -4,8 +4,7 @@ import './lights.scss';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
 // import ButtonGroup from 'react-bootstrap/ButtonGroup';
 // // import 'bootstrap/dist/css/bootstrap.css';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import Select from 'react-select';
 
 /* FORMAT FOR LIGHT DATA
 {
@@ -82,8 +81,8 @@ function Lights(props){
 
   let root = document.documentElement;
 
-  const [evensColor, setEvensColor] = useState('rgb(0, 0, 0)');
-  const [oddsColor, setOddsColor] = useState('rgb(0, 0, 0)');
+  const [evensColor, setEvensColor] = useState('rgb(255, 255, 255)');
+  const [oddsColor, setOddsColor] = useState('rgb(255, 255, 255)');
   const [active, setActive] = useState(true);
   
   function fullColor(color){
@@ -110,11 +109,25 @@ function Lights(props){
 
     console.log(props.data);
 
+    const colorDropdownOptions = [
+
+      { value: 'off', label: 'Off'},
+      { value: 'red', label: 'Red'},
+      { value: 'green', label: 'Green'},
+      { value: 'blue', label: 'Blue'},
+      { value: 'orange', label: 'Orange'},
+      { value: 'yellow', label: 'Yellow'},
+      { value: 'lightGreen', label: 'Light Green'},
+      { value: 'cyan', label: 'Cyan'},
+      { value: 'purple', label: 'Purple'},
+      { value: 'pink', label: 'Pink'},
+    ]
+
 
     return(
         <div>
             
-        <ul class="lightrope">
+        <ul className={"lightrope"}>
           <li></li>
           <li></li>
           <li></li>
@@ -162,6 +175,14 @@ function Lights(props){
         <h4>Color: {colorToSend}</h4>
         <h4>Effect: {effectToSend}</h4>
         <h4>Status: {statusToSend}</h4>
+        <Select
+          className={'colorDropdown'}
+          placeholder={'Select a Color'}
+          defaultValue={colorToSend}
+          onChange={function(event){setColorToSend(event.value);console.log(event.value);}}
+          options={colorDropdownOptions}
+        />
+        
         <button onClick={function(){setColorToSend('red');}}>Set Color Red</button>
         <button onClick={function(){setEffectToSend('fullOn'); updateLightDataToSend();}}>Turn On</button>
         <button onClick={function(){setEffectToSend('ledOff'); setColorToSend('off'); updateLightDataToSend();}}>Turn Off</button>

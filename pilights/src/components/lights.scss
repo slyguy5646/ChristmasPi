@@ -16,6 +16,12 @@ $light-off-opacity: 0.4;
 $evensColor: var(--evensColor);
 $oddsColor: var(--oddsColor);
 
+.colorDropdown{
+  width: 300px;
+  color: red;
+}
+
+
 
 body {
   background: #000;
