@@ -19,6 +19,7 @@ $oddsColor: var(--oddsColor);
 .colorDropdown{
   width: 300px;
   color: red;
+  margin: auto;
 }
 
 
@@ -32,11 +33,12 @@ body {
   white-space: nowrap;
   overflow: hidden;
   position: absolute;
+  left: 0;
   z-index: 1;
   margin: -15px 0 0 0;
   padding: 0;
   pointer-events: none;
-  width: 100%;
+  width: 90%;
   li {
     position: relative;
     animation-fill-mode: both; 
@@ -119,3 +121,8 @@ body {
 //     50% { background: rgba(247,0,148,$light-off-opacity);
 //     box-shadow: 0px $globe-height/6 $globe-width*2 $globe-spread rgba(247,0,148,0.2);}
 // }
+
+.dropdowns{
+  align-items: center;
+  margin: auto;
+}

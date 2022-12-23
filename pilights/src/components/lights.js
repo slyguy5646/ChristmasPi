@@ -44,23 +44,19 @@ function Lights(props){
   })
   
   
-  const [colorToSend, setColorToSend] = useState('off');
+  const [colorToSend, setColorToSend] = useState('Select a Color');
   const [effectToSend, setEffectToSend] = useState('ledOff');
   const [statusToSend, setStatusToSend] = useState('OFF');
   
   
-  function updateLightDataToSend(){
-    setLightDataToSend({
-      color: colorToSend,
-      effect: effectToSend,
-      status: statusToSend
-    })
+  function updateLightDataToSend(object){
+    setLightDataToSend(object)
   }
 
   async function postLightData(){
-    
-    var url = 'http://192.168.1.214:5000/lights';
-    const response = await fetch(url, {
+
+    const lightData = lightDataToSend;
+      const response = await fetch('http://192.168.1.214:5000/lights', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'no-cors',
       headers: {
@@ -81,7 +77,7 @@ function Lights(props){
 
   let root = document.documentElement;
 
-  const [evensColor, setEvensColor] = useState('rgb(255, 255, 255)');
+  const [evensColor, setEvensColor] = useState('rgb(255, 0, 255)');
   const [oddsColor, setOddsColor] = useState('rgb(255, 255, 255)');
   const [active, setActive] = useState(true);
   
@@ -118,11 +114,31 @@ function Lights(props){
       { value: 'orange', label: 'Orange'},
       { value: 'yellow', label: 'Yellow'},
       { value: 'lightGreen', label: 'Light Green'},
-      { value: 'cyan', label: 'Cyan'},
+      { value: 'powderBlue', label: 'Cyan'},
       { value: 'purple', label: 'Purple'},
       { value: 'pink', label: 'Pink'},
     ]
+    
+    const effectDropdownOptions = [
+      { value: 'ledOff', label: 'Off'},
+      { value: 'fullOn', label: 'On'}
+    ]
 
+    async function sendTest(){
+      setLightDataToSend({...lightDataToSend, effect: 'fullOn'});
+      
+            await fetch('http://192.168.1.214:5000/lights', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(lightDataToSend) // body data type must match "Content-Type" header
+          });
+    }
 
     return(
         <div>
@@ -171,27 +187,40 @@ function Lights(props){
           <li></li>
           <li></li>
         </ul>
-        <h1>hello</h1>
+
         <h4>Color: {colorToSend}</h4>
         <h4>Effect: {effectToSend}</h4>
         <h4>Status: {statusToSend}</h4>
-        <Select
-          className={'colorDropdown'}
-          placeholder={'Select a Color'}
-          defaultValue={colorToSend}
-          onChange={function(event){setColorToSend(event.value);console.log(event.value);}}
-          options={colorDropdownOptions}
-        />
+
+        <h3>{lightDataToSend?.color}</h3>
+        <h3>{lightDataToSend?.effect}</h3>
+        <h3>{lightDataToSend?.status}</h3>
         
-        <button onClick={function(){setColorToSend('red');}}>Set Color Red</button>
-        <button onClick={function(){setEffectToSend('fullOn'); updateLightDataToSend();}}>Turn On</button>
-        <button onClick={function(){setEffectToSend('ledOff'); setColorToSend('off'); updateLightDataToSend();}}>Turn Off</button>
-        <button 
-          onClick={function(){updateLightDataToSend(); setTimeout(postLightData, 3000); postLightData();}}
-        >
-          Apply
-        </button>
+        <div className='dropdowns'>
+          <Select
+            className={'colorDropdown'}
+            placeholder={colorToSend}
+            defaultValue={colorToSend}
+            onChange={function(event){setColorToSend(event.label); setLightDataToSend({...lightDataToSend, color: event.value}); }}
+            options={colorDropdownOptions}
+            value={colorToSend}
+          />
+          <Select
+            className={'colorDropdown'}
+            placeholder={'Select an Effect'}
+            defaultValue={effectToSend}
+            onChange={function(event){ setLightDataToSend({...lightDataToSend, effect: event.value});}}
+            options={effectDropdownOptions}
+          />
         </div>
+
+        {/* <h1>{colorToSend}</h1> */}
+        {/* <button onClick={function(){setColorToSend('red');}}>Set Color Red</button> */}
+        <button onClick={async function(){sendTest();}}>Turn On</button>
+        <button onClick={async function(){setLightDataToSend({...lightDataToSend, color: 'off', effect: 'ledOff'}); postLightData(); setColorToSend('off')}}>Turn Off</button>
+        <button onClick={function(){setLightDataToSend({...lightDataToSend}); postLightData(); console.log(lightDataToSend);}}>Apply</button>
+        </div>
+
     );
 
 }
