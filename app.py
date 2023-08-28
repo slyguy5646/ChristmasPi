@@ -27,6 +27,12 @@ def solidColor(color):
 
     return {"success": True, "data": getStrandStatusAsDict()}
 
+@app.route('/brightness/<path:value>')
+def brightness(value):
+    setBrightness(float(value))
+
+    print(pixels._brightness)
+    return {"success": True, "data": getStrandStatusAsDict()}
 
 @app.route('/off')
 def turnOff():

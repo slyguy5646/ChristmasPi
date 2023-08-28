@@ -9,18 +9,36 @@ ORDER = neopixel.RGB
 
 strandStatus = "off" # "on" | "off"
 strandColor = "none" # any key of colorDict
+strandBrightness = 0.5 # number 0.0-0.5
 
 
-def setStrandInfo(color, status):
+def setStrandInfo(color, status, brightness=strandBrightness):
     global strandColor
     global strandStatus
+    global strandBrightness
     strandColor = color
     strandStatus = status
+    strandBrightness = brightness
+
+def setBrightness(brightness):
+    if strandColor == "none" or strandStatus == "off":
+        return
+    valueToApply = min(brightness, 0.5)
+    currentColorValue = colorDict[strandColor]
+
+    newColor = []
+
+    for value in currentColorValue:
+        newColor.append(int(float(value) * 2 * valueToApply))
+
+    pixels.fill(tuple(newColor))
+    pixels.show()
+    setStrandInfo(strandColor, strandStatus, valueToApply)
 
     
 
 def getStrandStatusAsDict():
-    return {"color": strandColor, "status": strandStatus}
+    return {"color": strandColor, "status": strandStatus, "brightness": strandBrightness}
 
 def getColorValueFromKey(colorKey):
     return colorDict[colorKey]
